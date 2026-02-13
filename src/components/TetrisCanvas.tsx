@@ -31,6 +31,10 @@ export default function TetrisCanvas() {
     // }, 5000);
 
     const keyListener = (e: KeyboardEvent) => {
+      if(e.key === "ArrowDown") {
+        tryMove(0, 1);
+      }
+
       if(!e.repeat) {
         console.log(`Key Pressed: "${e.key}"`);
 
@@ -44,10 +48,6 @@ export default function TetrisCanvas() {
 
         if(e.key === "ArrowRight") {
           tryMove(1, 0);
-        }
-
-        if(e.key === "ArrowDown") {
-          tryMove(0, 1);
         }
         
         if(e.key == "x") {
