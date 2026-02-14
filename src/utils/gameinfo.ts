@@ -2,7 +2,7 @@ import { type PIECE_INFO_DICT_TYPE } from "./types";
 
 export const COLS = 10;
 export const ROWS = 24;
-export const CELL_SIZE_PX = 20;
+export const CELL_SIZE_PX = 16;
 
 export const PIECE_INFO: PIECE_INFO_DICT_TYPE = {
   "I": {
