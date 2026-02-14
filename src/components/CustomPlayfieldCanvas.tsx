@@ -1,13 +1,14 @@
 import { useEffect, useRef } from "react";
-import { ROWS, COLS, CELL_SIZE_PX } from "../utils/gameinfo";
+import { COLS, CELL_SIZE_PX } from "../utils/gameinfo";
 import { drawBoardBackground, drawCustomPlayfield } from "../utils/drawing";
 import { type CUSTOM_CELL } from "../utils/types";
+// import jsonData from "../data/cases.json" with { type: "json" };
 
-export default function CustomPlayfieldCanvas() {
+export default function CustomPlayfieldCanvas({ board }: { board: string }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafIdRef = useRef<number | null>(null);
-  const board = "GNGGGGGGGGGNGGGGGGGGGNGGGGGGGGGNGGGGGGGGGNGGGGGGGGGNGGGGGGGGGNGGGGGGGGGNGGGGGGGGGNGGGGGGGGNTTIJJZZLLNTZIJIOOLLNZZZJIOOLLNZZZSILLLLNNZSSIILOONNNSNNILOONNNNNNIJJJNNNNNNISSJNNNNNNNJSSNNNNNNNJJJNNNNNNNLLLNNNNNNNLNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN";
-  let custom_playfield: CUSTOM_CELL[][] = []
+  // const board = jsonData["playfield"][12];
+  let custom_playfield: CUSTOM_CELL[][] = [];
 
   for(let r = 0; r < 40; r++) {
     let row: CUSTOM_CELL[] = [];
@@ -22,6 +23,7 @@ export default function CustomPlayfieldCanvas() {
 
   // custom_playfield = custom_playfield.reverse();
   console.log(`Custom Playfield: ${JSON.stringify(custom_playfield)}`);
+  // console.log(`Json: ${JSON.stringify(jsonData)}`);
   useEffect(() => {
     const canvas = canvasRef.current;
     if(!canvas) return;
@@ -31,7 +33,6 @@ export default function CustomPlayfieldCanvas() {
 
     const drawCanvasLoop = (timestamp: number) => {
       if(!ctx) return;
-
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawBoardBackground(ctx, 40, COLS);
       drawCustomPlayfield(ctx, custom_playfield);
@@ -45,12 +46,18 @@ export default function CustomPlayfieldCanvas() {
       if(rafIdRef.current != null) cancelAnimationFrame(rafIdRef.current);
       // clearInterval(interval);
     };
-  }, []);
+  }, [board]);
 
   return (
-    <div className="outline-[1px] outline-[#999]">
-      <canvas ref={canvasRef} />
+    <div>
+      <div className="outline-[1px] outline-[#999]">
+        <canvas ref={canvasRef} />
+      </div>
+      <div className="flex flex-col">
+        <p></p>
+      </div>
     </div>
+    
   );
 }
 
