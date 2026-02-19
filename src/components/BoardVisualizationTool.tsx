@@ -5,7 +5,7 @@ import CustomPlayfieldCanvas from "./CustomPlayfieldCanvas";
 import type { CUSTOM_CELL } from "../utils/types";
 
 export function BoardVisualizationTool() {
-  const [index, setIndex] = useState<number>(1);
+  const [index, setIndex] = useState<number>(0);
   // if(index < 0 || index > 24) return(<div></div>);
   return (
     <div className="flex flex-col gap-4">

@@ -7,7 +7,9 @@ import { type CUSTOM_CELL } from "../utils/types";
 export default function CustomPlayfieldCanvas({ board }: { board: string }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafIdRef = useRef<number | null>(null);
-  // const board = jsonData["playfield"][12];
+
+  // board = "";
+
   let custom_playfield: CUSTOM_CELL[][] = [];
 
   for(let r = 0; r < 40; r++) {

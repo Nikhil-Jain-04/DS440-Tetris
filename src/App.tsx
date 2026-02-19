@@ -2,6 +2,7 @@ import { BoardVisualizationTool } from './components/BoardVisualizationTool'
 import CustomPlayfieldCanvas from './components/CustomPlayfieldCanvas'
 import HoldPieceCanvas from './components/HoldPieceCanvas'
 import PieceQueueCanvas from './components/PieceQueueCanvas'
+import SecondBoardVisualizationTool from './components/SecondBoardVisualizationTool'
 import TetrisCanvas from './components/TetrisCanvas'
 
 function App() {
@@ -18,10 +19,11 @@ function App() {
   return (
     <div className="w-screen h-screen bg-cyan-500 flex items-center justify-center">
       <div className="w-full flex flex-row justify-center gap-4">
-        {/* <HoldPieceCanvas /> */}
-        {/* <CustomPlayfieldCanvas /> */}
-        {/* <PieceQueueCanvas /> */}
-        <BoardVisualizationTool />
+        {/* <HoldPieceCanvas />
+        <TetrisCanvas />
+        <PieceQueueCanvas /> */}
+        {/* <BoardVisualizationTool /> */}
+        <SecondBoardVisualizationTool />
       </div>
     </div>
   )

@@ -6,6 +6,7 @@ import { drawGame } from "../utils/drawing";
 export default function TetrisCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafIdRef = useRef<number | null>(null);
+  const selectedRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -29,6 +30,11 @@ export default function TetrisCanvas() {
     //   console.log('hard dropping...');
     //   hardDropPiece();
     // }, 5000);
+    // const keyDownListener = (e: KeyboardEvent) => {
+    //   if(!e.repeat) {
+        
+    //   }
+    // };
 
     const keyListener = (e: KeyboardEvent) => {
       if(e.key === "ArrowDown") {
