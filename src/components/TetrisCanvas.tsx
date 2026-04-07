@@ -1,12 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ROWS, COLS, CELL_SIZE_PX } from "../utils/gameinfo";
-import { board, currPiece, currPos, currRotation, initGame, tryMove, tryRotation, hardDropPiece, swapHoldPiece } from "../utils/gameutils";
-import { drawGame } from "../utils/drawing";
+import { board, currPiece, currPos, currRotation, holdPiece, pieceQueue, prediction, initGame, tryMove, tryRotation, hardDropPiece, swapHoldPiece } from "../utils/gameutils";
+import { drawGame, drawPosDot } from "../utils/drawing";
 
 export default function TetrisCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafIdRef = useRef<number | null>(null);
   const selectedRef = useRef<Set<string>>(new Set());
+  const [, setTick] = useState(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,6 +21,8 @@ export default function TetrisCanvas() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawGame(ctx);
+      if (prediction) drawPosDot(ctx, prediction.x, prediction.y);
+      setTick(t => t + 1);
 
       rafIdRef.current = requestAnimationFrame(drawCanvasLoop);
     };
@@ -64,7 +67,7 @@ export default function TetrisCanvas() {
           tryRotation(-1);
         }
 
-        if(e.key == "c") {
+        if(e.key == " ") {
           swapHoldPiece();
         }
 
@@ -89,8 +92,13 @@ export default function TetrisCanvas() {
   }, []);
 
   return (
-    <div className="outline-[1px] outline-[#999]">
+    <div className="outline-[1px] outline-[#999]" style={{ position: "relative" }}>
       <canvas ref={canvasRef} />
+      <pre style={{ fontSize: 11, lineHeight: 1.3, position: "fixed", top: 0, left: 0, whiteSpace: "pre-wrap", width: 360 }}>
+        {`piece: ${currPiece}  hold: ${holdPiece}  queue: ${pieceQueue.slice(0, 5).join("")}\n`}
+        {`prediction: x=${prediction?.x ?? "?"} y=${prediction?.y ?? "?"} r=${prediction?.r ?? "?"}\n`}
+        {([...board].reverse().map(row => row.map(c => c ?? "N").join("")).join("").padEnd(400, "N"))}
+      </pre>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { type PIECE_INFO_DICT_TYPE } from "./types";
 
 export const COLS = 10;
-export const ROWS = 24;
+export const ROWS = 25;
 export const CELL_SIZE_PX = 16;
 
 export const PIECE_INFO: PIECE_INFO_DICT_TYPE = {
@@ -33,7 +33,13 @@ export const PIECE_INFO: PIECE_INFO_DICT_TYPE = {
         [0, 1, 0, 0]
       ]
     ],
-    kick_index: 1
+    kick_index: 1,
+    tetrPosToMineTranslation: [
+      [-1, -1],
+      [-2, -1],
+      [-2, -2],
+      [-1, -2]
+    ]
   },
   "O": {
     color: "#FFFF00",
@@ -55,7 +61,13 @@ export const PIECE_INFO: PIECE_INFO_DICT_TYPE = {
         [1, 1]
       ]
     ],
-    kick_index: 2
+    kick_index: 2,
+    tetrPosToMineTranslation: [
+      [0, -1],
+      [0, 0],
+      [-1, 0],
+      [-1, -1]
+    ]
   },
   "T": {
     color: "#800080",
@@ -81,7 +93,13 @@ export const PIECE_INFO: PIECE_INFO_DICT_TYPE = {
         [0, 1, 0]
       ]
     ],
-    kick_index: 0
+    kick_index: 0,
+    tetrPosToMineTranslation: [
+      [-1, -1],
+      [-1, -1],
+      [-1, -1],
+      [-1, -1]
+    ]
   },
   "S": {
     color: "#00FF00",
@@ -107,7 +125,13 @@ export const PIECE_INFO: PIECE_INFO_DICT_TYPE = {
         [0, 1, 0]
       ]
     ],
-    kick_index: 0
+    kick_index: 0,
+    tetrPosToMineTranslation: [
+      [-1, -1],
+      [-1, -1],
+      [-1, -1],
+      [-1, -1]
+    ]
   },
   "Z": {
     color: "#FF0000",
@@ -133,7 +157,13 @@ export const PIECE_INFO: PIECE_INFO_DICT_TYPE = {
         [1, 0, 0]
       ]
     ],
-    kick_index: 0
+    kick_index: 0,
+    tetrPosToMineTranslation: [
+      [-1, -1],
+      [-1, -1],
+      [-1, -1],
+      [-1, -1]
+    ]
   },
   "J": {
     color: "#0000FF",
@@ -159,7 +189,13 @@ export const PIECE_INFO: PIECE_INFO_DICT_TYPE = {
         [1, 1, 0]
       ]
     ],
-    kick_index: 0
+    kick_index: 0,
+    tetrPosToMineTranslation: [
+      [-1, -1],
+      [-1, -1],
+      [-1, -1],
+      [-1, -1]
+    ]
   },
   "L": {
     color: "#FF7F00",
@@ -185,7 +221,13 @@ export const PIECE_INFO: PIECE_INFO_DICT_TYPE = {
         [0, 1, 0]
       ]
     ],
-    kick_index: 0
+    kick_index: 0,
+    tetrPosToMineTranslation: [
+      [-1, -1],
+      [-1, -1],
+      [-1, -1],
+      [-1, -1]
+    ]
   }
 };
 

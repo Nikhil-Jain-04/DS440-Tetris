@@ -52,6 +52,33 @@ function clearLinesOnBoard(board: CELL[][]): void {
   }
 }
 
+export function placePieceOnBoard(
+  board: CELL[][],
+  piece: PIECE,
+  x: number,
+  y: number,
+  rotation: number
+): CELL[][] {
+  const rMatrix = PIECE_INFO[piece].rotations[rotation];
+  y = 39 - y;
+  x += PIECE_INFO[piece].tetrPosToMineTranslation[rotation][0]
+  y += PIECE_INFO[piece].tetrPosToMineTranslation[rotation][1]
+
+  for (let dy = 0; dy < rMatrix.length; dy++) {
+    for (let dx = 0; dx < rMatrix[dy].length; dx++) {
+      if (rMatrix[dy][dx] == 1) {
+        const row = y + dy;
+        const col = x + dx;
+        if (row >= 0 && row < 40 && col >= 0 && col < COLS) {
+          board[row][col] = piece
+        }
+      }
+    }
+  }
+
+  return board;
+}
+
 // Enumerates all possible final board states from dropping a piece straight down
 // at every valid (rotation, column) combination. Does not account for tucks or
 // spin placements that require lateral movement after partial drops.

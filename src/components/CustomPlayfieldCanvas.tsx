@@ -24,7 +24,7 @@ export default function CustomPlayfieldCanvas({ board }: { board: string }) {
   }
 
   // custom_playfield = custom_playfield.reverse();
-  console.log(`Custom Playfield: ${JSON.stringify(custom_playfield)}`);
+  // console.log(`Custom Playfield: ${JSON.stringify(custom_playfield)}`);
   // console.log(`Json: ${JSON.stringify(jsonData)}`);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -59,7 +59,6 @@ export default function CustomPlayfieldCanvas({ board }: { board: string }) {
         <p></p>
       </div>
     </div>
-    
   );
 }
 

@@ -8,7 +8,23 @@ export let pieceQueue: PIECE[] = [];
 export let currPos = [3, 0];
 export let currRotation = 0;
 export let holdPiece: PIECE | null = null;
+export let prediction: { x: number; y: number; r: string } | null = null;
 let swapped: boolean = false;
+
+function fetchPrediction() {
+  if (!currPiece) return;
+  const boardStr = [...board].reverse().map(row => row.map(c => c ?? "N").join("")).join("").padEnd(400, "N");
+  const body = {
+    placed: currPiece,
+    hold: holdPiece ?? "N",
+    queue: pieceQueue.slice(0, 5).join(""),
+    init_board: boardStr,
+  };
+  fetch("http://localhost:8001/predict", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+    .then(r => r.json())
+    .then(data => { prediction = data; })
+    .catch(() => {});
+}
 
 resetBoard();
 
@@ -30,6 +46,7 @@ export function initGame() {
   resetBoard();
   initPieceQueue();
   getNextPiece();
+  fetchPrediction();
 }
 
 function getNextPiece() {
@@ -74,6 +91,7 @@ export function swapHoldPiece() {
   }
 
   swapped = true;
+  fetchPrediction();
 }
 
 export function hardDropPiece() {
@@ -96,6 +114,7 @@ function lockPiece() {
   clearLines();
   getNextPiece();
   swapped = false;
+  fetchPrediction();
 }
 
 export function tryMove(dx: number, dy: number) {

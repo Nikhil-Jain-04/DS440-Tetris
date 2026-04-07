@@ -150,3 +150,11 @@ export function drawHoldPiece(ctx: CanvasRenderingContext2D) {
     }
   }
 }
+
+export function drawPosDot(ctx: CanvasRenderingContext2D, x: number, y: number) {
+  y = ROWS - 1 - y;
+  ctx.fillStyle = "#FFFFFF";
+  ctx.beginPath()
+  ctx.arc((x + 0.5) * CELL_SIZE_PX, (y + 0.5) * CELL_SIZE_PX, CELL_SIZE_PX / 4, 0, 2 * Math.PI);
+  ctx.fill();
+}

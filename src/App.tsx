@@ -19,11 +19,11 @@ function App() {
   return (
     <div className="w-screen h-screen bg-cyan-500 flex items-center justify-center">
       <div className="w-full flex flex-row justify-center gap-4">
-        {/* <HoldPieceCanvas />
+        <HoldPieceCanvas />
         <TetrisCanvas />
-        <PieceQueueCanvas /> */}
+        <PieceQueueCanvas />
         {/* <BoardVisualizationTool /> */}
-        <SecondBoardVisualizationTool />
+        {/* <SecondBoardVisualizationTool /> */}
       </div>
     </div>
   )
