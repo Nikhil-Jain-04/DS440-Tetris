@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ROWS, COLS, CELL_SIZE_PX } from "../utils/gameinfo";
 import { board, currPiece, currPos, currRotation, holdPiece, pieceQueue, prediction, initGame, tryMove, tryRotation, hardDropPiece, swapHoldPiece } from "../utils/gameutils";
 import { drawGame, drawPosDot } from "../utils/drawing";
+import { applyPrediction } from "../utils/gameutils";
 
 export default function TetrisCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -15,6 +16,8 @@ export default function TetrisCanvas() {
     canvas.width = COLS * CELL_SIZE_PX;
     canvas.height = ROWS * CELL_SIZE_PX;
     const ctx = canvas.getContext("2d");
+
+    // console.log('boardddd',board)
 
     const drawCanvasLoop = (timestamp: number) => {
       if(!ctx) return;
@@ -40,6 +43,7 @@ export default function TetrisCanvas() {
     // };
 
     const keyListener = (e: KeyboardEvent) => {
+      console.log('boardddd',board)
       if(e.key === "ArrowDown") {
         tryMove(0, 1);
       }
@@ -99,8 +103,11 @@ export default function TetrisCanvas() {
         {`prediction: x=${prediction?.x ?? "?"} y=${prediction?.y ?? "?"} r=${prediction?.r ?? "?"}\n`}
         {([...board].reverse().map(row => row.map(c => c ?? "N").join("")).join("").padEnd(400, "N"))}
       </pre>
+      <button onClick={applyPrediction} style={{ position: "fixed", top: 10, right: 10 }} className="bg-blue-500 text-white px-4 py-2 rounded">
+        AI Move
+      </button>
     </div>
   );
 }
 
-
+   
